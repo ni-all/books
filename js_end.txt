@@ -1,0 +1,41 @@
+
+
+function fillList() {
+    var ul;
+    ul = document.getElementById("bookList");
+    bookObj["books"].forEach((element, index) => {
+        const li = document.createElement("li");
+        const title = document.createElement("span");
+        title.classList.add("w3-bold");
+        title.textContent = element["title"];
+        li.appendChild(title);
+        const author = document.createElement("span");
+        author.classList.add("w3-margin-left", "w3-margin-right")
+        author.textContent = element["author"];
+        li.appendChild(author);
+        const storage = document.createElement("span");
+        storage.classList.add("w3-right")
+        storage.textContent = element["storage"];
+        li.appendChild(storage);
+        ul.appendChild(li);
+    });
+}
+
+function search() {
+    var input, filter, ul, li, a, i, spanList, txtValue;
+    input = document.getElementById("searchBox");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("bookList");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        spanList = li[i].getElementsByTagName("span");
+        txtValue = spanList[0].textContent + "--" + spanList[1].textContent + "--" + spanList[2].textContent;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+fillList();
